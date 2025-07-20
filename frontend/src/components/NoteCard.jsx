@@ -3,8 +3,11 @@ import React from 'react'
 import { formatDate } from '../libs/utils'
 import api from '../libs/axios'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router'
 
 const NoteCard = ({note,setNotes}) => {
+
+  const navigate = useNavigate();
 
   const handleDelete = async(e,id) => {
     e.preventDefault();
@@ -24,7 +27,7 @@ const NoteCard = ({note,setNotes}) => {
   return (
     <div
       className='cursor-pointer card bg-base-100 hover:shadow-lg transition-all duration-200 border-t-4 border-solid border-[#00FF9D]'
-      // onClick={() => navigate(`/note/${note._id}`)}
+      onClick={() => navigate(`/note/${note._id}`)}
     >
         <div className='card-body'>
             <h3 className='card-title text-base-content'>{note.title}</h3>
