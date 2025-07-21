@@ -19,12 +19,23 @@ connectDB()
 //middleware
 app.use(express.json()) //this middleware will parse JSON bodies: req.body
 
-if(process.env.NODE_ENV !== "production") {
-    app.use(
-    cors({
-        origin: "http://localhost:5173"
-    }))
-}
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://notenest-1-hlli.onrender.com" // your frontend Render URL
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
+// if(process.env.NODE_ENV !== "production") {
+//     app.use(
+//     cors({
+//         origin: "http://localhost:5173"
+//     }))
+// }
 
 //our simple custom middleware
 app.use((req,res,next) => {
