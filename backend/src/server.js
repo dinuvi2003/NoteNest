@@ -19,12 +19,26 @@ connectDB()
 //middleware
 app.use(express.json()) //this middleware will parse JSON bodies: req.body
 
-if(process.env.NODE_ENV !== "production") {
-    app.use(
-    cors({
-        origin: "http://localhost:5173"
-    }))
-}
+// if(process.env.NODE_ENV !== "production") {
+//     app.use(
+//     cors({
+//         origin: "http://localhost:5173"
+//     }))
+// }
+
+const allowedOrigins = [
+  "http://localhost:5173",                           // development
+  "https://your-frontend.onrender.com"               // production (replace with actual URL)
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+  })
+);
+
 
 //our simple custom middleware
 app.use((req,res,next) => {
